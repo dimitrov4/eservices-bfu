@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Изпити</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Изпити</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @defer {
+    @let exams = exams$ | async;
+    @if (exams?.size) {
+      <ion-list>
+        @for (group of exams | keyvalue; track group.key) {
+          <ion-card class="ion-margin">
+            <ion-card-header>
+              <ion-card-title>{{ group.value[0].startDate | date }}</ion-card-title>
+            </ion-card-header>
+
+            @for (exam of group.value; track exam.id) {
+              <ion-item-divider style="min-height: 0;" />
+              <ion-card-content>
+                <div><span class="model-attribute">Час:</span>
+                  {{ exam.startDate | date: "shortTime" }}-{{ exam.endDate | date: "shortTime" }}
+                  ({{ [exam.startDate, exam.endDate] | duration }})</div>
+                <div><span class="model-attribute">Зала:</span> {{ exam.room }}</div>
+                <div><span class="model-attribute">Предмет:</span> {{ exam.subject }}</div>
+                <div><span class="model-attribute">Преподавател:</span> {{ exam.teacher }}</div>
+                <div><span class="model-attribute">Тип:</span> {{ exam.type }}</div>
+                <div><span class="model-attribute">Сесия:</span> {{ exam.session }}</div>
+              </ion-card-content>
+            }
+          </ion-card>
+        }
+      </ion-list>
+    } @else {
+      <div class="empty-list-message-container">
+        <p class="empty-list-message">Няма предстоящи изпити.</p>
+      </div>
+    }
+  } @placeholder {
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  }
+</ion-content>

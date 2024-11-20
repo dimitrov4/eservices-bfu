@@ -1,0 +1,34 @@
+ion-card {
+  margin: 20px;
+  border-radius: 20px;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+ion-list {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0px;
+  background: transparent;
+}
+
+ion-item-divider {
+  min-height: 0;
+}
+
+.model-attribute {
+  font-weight: bold;
+}
+
+.empty-list-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.empty-list-message {
+  font-size: 1.2em;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}

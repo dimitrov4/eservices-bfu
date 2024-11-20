@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Настройки</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Настройки</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @defer {
+    <form class="centered" [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+      <ion-input tabindex="0" formControlName="apiUser" labelPlacement="stacked" placeholder="username">
+        @if (settingsForm.get("apiUser")?.valid) {
+          <div slot="label">Име</div>
+        } @else {
+          <div slot="label">Име <ion-text color="danger">(Задължително)</ion-text></div>
+        }
+      </ion-input>
+
+      <ion-input tabindex="0" formControlName="apiPass" labelPlacement="stacked" type="password" placeholder="password">
+        @if (settingsForm.get("apiPass")?.valid) {
+          <div slot="label">Парола</div>
+        } @else {
+          <div slot="label">Парола <ion-text color="danger">(Задължително)</ion-text></div>
+        }
+        <ion-input-password-toggle tabindex="-1" slot="end"></ion-input-password-toggle>
+      </ion-input>
+
+      <ion-input tabindex="0" formControlName="facultyNumber" labelPlacement="stacked" placeholder="00000000">
+        @if (settingsForm.get("facultyNumber")?.valid) {
+          <div slot="label">Факултетен номер</div>
+        } @else {
+          <div slot="label">Факултетен номер <ion-text color="danger">(8 цифри)</ion-text></div>
+        }
+      </ion-input>
+
+      <ion-button class="button" type="submit" [disabled]="!settingsForm.valid">
+        Запази
+      </ion-button>
+    </form>
+
+    <div class="centered settings-saved-notification" [class.visible]="settingsSavedNotification">
+      <p>Промените са запазени.</p>
+    </div>
+
+    <div class="centered more-information">
+      <p>За повече информация посетете</p>
+      <a href="https://e-services.bfu.bg/api/">https://e-services.bfu.bg/api/</a>
+    </div>
+  } @placeholder {
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  }
+</ion-content>

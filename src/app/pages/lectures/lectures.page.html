@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Лекции</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Лекции</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @defer {
+    @let lectures = lectures$ | async;
+    @if (lectures?.size) {
+      <ion-list>
+        @for (group of lectures | keyvalue; track group.key) {
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ group.value[0].startDate | date }}</ion-card-title>
+            </ion-card-header>
+
+            @for (lecture of group.value; track lecture.id) {
+              <ion-item-divider />
+              <ion-card-content>
+                <div><span class="model-attribute">Час:</span>
+                  {{ lecture.startDate | date: "shortTime" }}-{{ lecture.endDate | date: "shortTime" }}
+                  ({{ [lecture.startDate, lecture.endDate] | duration }})</div>
+                <div><span class="model-attribute">Зала:</span> {{ lecture.room }}</div>
+                <div><span class="model-attribute">Предмет:</span> {{ lecture.subject }}</div>
+                <div><span class="model-attribute">Преподавател:</span> {{ lecture.teacher }}</div>
+              </ion-card-content>
+            }
+          </ion-card>
+        }
+      </ion-list>
+    } @else {
+      <div class="empty-list-message-container">
+        <p class="empty-list-message">Няма предстоящи лекции.</p>
+      </div>
+    }
+  } @placeholder {
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  }
+</ion-content>

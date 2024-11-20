@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Оценки</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Оценки</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @defer {
+    @let marks = marks$ | async;
+    @if (marks?.size) {
+      <ion-list>
+        @for (group of marks | keyvalue; track group.key) {
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ group.value[0].date | date }}</ion-card-title>
+            </ion-card-header>
+
+            @for (mark of group.value; track mark.id) {
+              <ion-item-divider />
+              <ion-card-content>
+                <div><span class="model-attribute">Предмет:</span> {{ mark.subject }}</div>
+                <div><span class="model-attribute">Оценка:</span> {{ mark.mark }}</div>
+                <div><span class="model-attribute">Сесия:</span> {{ mark.session }}</div>
+                <div><span class="model-attribute">Кредити:</span> {{ mark.credits }}</div>
+              </ion-card-content>
+            }
+          </ion-card>
+        }
+      </ion-list>
+    } @else {
+      <div class="empty-list-message-container">
+        <p class="empty-list-message">Няма налични оценки.</p>
+      </div>
+    }
+  } @placeholder {
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  }
+</ion-content>

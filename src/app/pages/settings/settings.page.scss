@@ -1,0 +1,60 @@
+form {
+  margin-top: 30px;
+}
+
+ion-input,
+ion-button::part(native) {
+  height: 65px;
+  width: 300px;
+  color: var(--ion-text-color);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+  --border-radius: 20px;
+  --background: var(--ion-background-color);
+}
+
+ion-input {
+  margin-bottom: 20px;
+  --highlight-height: 0px;
+  --highlight-color: var(--ion-text-color) !important;
+  --padding-start: 24px !important;
+  --padding-end: 24px !important;
+}
+
+ion-input-password-toggle {
+  margin: -15px -10px 0px 0px !important;
+  margin-inline-start: 10px !important;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-saved-notification {
+  opacity: 0;
+  transition: opacity 0.1s ease-in;
+}
+
+.settings-saved-notification.visible {
+  opacity: 1;
+}
+
+.more-information {
+  position: absolute;
+  bottom: 75px;
+  width: 100%;
+}
+
+.more-information>* {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  color: var(--ion-text-color);
+  margin-bottom: 8px;
+}
+
+.more-information>a {
+  font-weight: 500;
+}

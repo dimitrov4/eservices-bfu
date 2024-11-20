@@ -1,0 +1,7 @@
+{
+  "name": "eservices-bfu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
